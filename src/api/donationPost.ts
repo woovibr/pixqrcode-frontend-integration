@@ -1,31 +1,35 @@
-import { baseUrl } from './api';
+import { baseUrl } from "./api";
 
-const url = '/donation'
+const url = "/donation";
 
 const getUrl = () => `${baseUrl}${url}`;
 
 export type DonationPostResponse = {
-  id: string,
+  id: string;
   value: number;
   comment: string;
   status: string;
   brCode: string;
-}
+};
 export type DonationPayload = {
   comment: string;
   value: number;
 };
-export const donationPost = async (payload: DonationPayload): Promise<DonationPostResponse> => {
+export const donationPost = async (
+  payload: DonationPayload
+): Promise<DonationPostResponse> => {
   const response = await fetch(getUrl(), {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
 
   const data = await response.json();
 
+  console.log("data", data);
+
   return data;
-}
+};
